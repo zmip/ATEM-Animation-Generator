@@ -50,8 +50,6 @@ So yeah, this is my take on how DVE keyframe animations on these switchers shoul
 
 As I've written earlier, I'm impressed with what the ATEM Mini's can do, hardware-wise, but in my opinion there's a lot of room for improvement in the software (either ATEM Software Control or in the machines themselves).
 
-Use it to your advantage, fork and improve.
-
 ## Supported devices
 
 * ATEM Mini
@@ -91,3 +89,5 @@ Use it to your advantage, fork and improve.
 ## Development information
 
 A minimal PHP-based build environment is included in the project. It basically allows you to run it on a local webserver in two modes: in **debug** mode, the CSS and JS files are linked into the HTML GUI file (faster). In **build** mode, the minimized CSS and JS files are injected into the HTML GUI file (slower) to produce a single portable distributable HTML file that runs the entire application. Check the /build directory to see what's expected there. Use your favorite job runner to minimize the CSS and JS files after they've been edited.
+
+Use this project to your advantage, clone, improve and share with the community!
