@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ATEM DVE Animation Generator</title>
+
+	#styles
+
+	#script
+
+</head>
+<body id="body">
+	
+	<div id="header">
+
+		<label for="device">
+			Device: 
+			<select class="dropdown" id="device">
+			</select>
+		</label>
+
+		<label for="switcher">
+			Switcher: 
+			<select class="dropdown" id="switcher" disabled>
+				<option id="ME1" selected>M/E 1</option>
+				<option id="ME2">M/E 2</option>
+				<option id="ME3">M/E 3</option>
+				<option id="ME4">M/E 4</option>
+			</select>
+		</label>
+
+		<div id="boxes">
+
+			<label>Keyers:</label>
+			<div id="keyers">
+			</div>
+
+			<label>Supersource boxes:</label>
+			<div id="supersource">
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="container">
+
+		<div id="screen">
+			
+			<div id="player">
+
+				<canvas id="canvas" width="1920" height="1174"></canvas> <!-- underscan border changes aspect ratio, we have to compensate -->
+				
+				<div id="playback_tools">
+					
+					<div id="fpsbtns">
+						<button type="button" class="fpsbtn" id="fpsbtn_10">10</button>
+						<button type="button" class="fpsbtn" id="fpsbtn_30">30</button>
+						<button type="button" class="fpsbtn" id="fpsbtn_60">60</button>
+						fps
+					</div>
+
+
+					<div id="playback_btns">
+						<button type="button" class="toggled" id="from_btn">From</button><button type="button" id="to_btn">To</button>
+						<button type="button" id="play_btn">
+							Play <svg viewBox="0 0 25 25"><polygon points="6,5 19,12 6,20" /></svg>
+						</button>
+					</div>
+					
+				</div>
+
+			</div>
+
+			<div id="container2">
+
+				<div id="animation_presets" class="pane">
+					
+					<div class="legend">Animation presets</div>
+
+					<ul id="animationlist" class="selectlist" tabIndex="0">
+					</ul>
+
+					<div id="animationlist_btns">
+						<button type="button" id="load_anim" class="btn-small" disabled>Load+Play</button>
+						<button type="button" id="save_anim" class="btn-small">Save as...</button>
+						<button type="button" id="rename_anim" class="btn-small" disabled>Rename...</button>
+						<button type="button" id="delete_anim" class="btn-small" disabled>Delete</button>
+						<!-- <button type="button" id="format_anim" class="btn-small" disabled>Get format</button> -->
+					</div>
+
+				</div>
+
+				<div class="rows">
+
+					<div id="filestuff" class="pane">
+
+						<fieldset id="save_macro">
+
+							<div class="legend">Download as ATEM macro</div>
+							<div class="row">
+								<label for="macro_name">with name: </label><input type="text" class="form-field" id="macro_name">
+							</div>
+							<div class="row">
+								<label for="macro_index">on index: </label><input type="text" class="form-field" id="macro_index">
+								<div class="flex-right">
+									<button type="button" id="save_macro_btn" class="btn-small" disabled>Download</button>			
+								</div>
+							</div>
+						</fieldset>
+
+					</div>
+
+					<div id="file_btns" class="pane">
+						<button type="button" id="save_settings_btn" class="btn-small">Download settings as...</button>
+
+						<label class="custom-file-upload btn">
+							<input id="upload_file" type="file" />
+							Load settings...
+						</label>
+
+						&nbsp;
+
+						<button type="button" id="clear_settings">Factory reset</button>
+
+					</div>
+				</div>
+
+
+			</div> <!-- container2 -->
+
+		</div>
+
+		<div id="options">
+			
+			<div id="optionsform">
+				
+				<fieldset id="transform" disabled>
+
+					<legend>Animation properties</legend>
+
+					<table id="fields">
+						
+						<tr>
+							<th>&nbsp;</th>
+							<th id="from_th" class="col-focus">From</th>
+							<th id="to_th">To</th>
+							<th>Frames</th>
+							<th>Delay</th>
+						</tr>
+
+						<tr>
+							<th class="input-label">pos x</th>
+							<td class="from-input"><input type="text" id="from_x" value="" maxlength="6" tabindex="1" readonly></td>
+							<td class="to-input"><input type="text" id="to_x" value="" maxlength="6" tabindex="2" readonly></td>
+							<td class="frames-input"><input type="text" id="frames_x" value="" maxlength="6" tabindex="15" readonly></td>
+							<td class="delay-input"><input type="text" id="delay_x" value="" maxlength="6" tabindex="22" readonly></td>
+						</tr>
+						<tr>
+							<th class="input-label">pos y</th>
+							<td class="from-input"><input type="text" id="from_y" value="" maxlength="6" tabindex="3" readonly></td>
+							<td class="to-input"><input type="text" id="to_y" value="" maxlength="6" tabindex="4" readonly></td>
+							<td class="frames-input"><input type="text" id="frames_y" value="" maxlength="6" tabindex="16" readonly></td>
+							<td class="delay-input"><input type="text" id="delay_y" value="" maxlength="6" tabindex="23" readonly></td>
+						</tr>
+						<tr>
+							<th class="input-label">size</th>
+							<td class="from-input"><input type="text" id="from_scale" value="" maxlength="6" tabindex="5" readonly></td>
+							<td class="to-input"><input type="text" id="to_scale" value="" maxlength="6" tabindex="6" readonly></td>
+							<td class="frames-input"><input type="text" id="frames_scale" value="" maxlength="6" tabindex="17" readonly></td>
+							<td class="delay-input"><input type="text" id="delay_scale" value="" maxlength="6" tabindex="24" readonly></td>
+						</tr>
+						<tr>
+							<th class="input-label">mask L</th>
+							<td class="from-input"><input type="text" id="from_cropL" value="" maxlength="6" tabindex="7" readonly></td>
+							<td class="to-input"><input type="text" id="to_cropL" value="" maxlength="6" tabindex="8" readonly></td>
+							<td class="frames-input"><input type="text" id="frames_cropL" value="" maxlength="6" tabindex="18" readonly></td>
+							<td class="delay-input"><input type="text" id="delay_cropL" value="" maxlength="6" tabindex="25" readonly></td>
+						</tr>
+						<tr>
+							<th class="input-label">mask T</th>
+							<td class="from-input"><input type="text" id="from_cropT" value="" maxlength="6" tabindex="9" readonly></td>
+							<td class="to-input"><input type="text" id="to_cropT" value="" maxlength="6" tabindex="10" readonly></td>
+							<td class="frames-input"><input type="text" id="frames_cropT" value="" maxlength="6" tabindex="19" readonly></td>
+							<td class="delay-input"><input type="text" id="delay_cropT" value="" maxlength="6" tabindex="26" readonly></td>
+						</tr>
+						<tr>
+							<th class="input-label">mask R</th>
+							<td class="from-input"><input type="text" id="from_cropR" value="" maxlength="6" tabindex="11" readonly></td>
+							<td class="to-input"><input type="text" id="to_cropR" value="" maxlength="6" tabindex="12" readonly></td>
+							<td class="frames-input"><input type="text" id="frames_cropR" value="" maxlength="6" tabindex="20" readonly></td>
+							<td class="delay-input"><input type="text" id="delay_cropR" value="" maxlength="6" tabindex="27" readonly></td>
+						</tr>
+						<tr>
+							<th class="input-label">mask B</th>
+							<td class="from-input"><input type="text" id="from_cropB" value="" maxlength="6" tabindex="13" readonly></td>
+							<td class="to-input"><input type="text" id="to_cropB" value="" maxlength="6" tabindex="14" readonly></td>
+							<td class="frames-input"><input type="text" id="frames_cropB" value="" maxlength="6" tabindex="21" readonly></td>
+							<td class="delay-input"><input type="text" id="delay_cropB" value="" maxlength="6" tabindex="28" readonly></td>
+						</tr>
+					</table>
+
+					<div id="data_btns">
+						
+						<div id="position_presets">
+
+							<div class="row">
+								<button type="button" id="set_pos_00">
+									<svg viewBox="0 0 25 25">
+										<polygon points="5,20 5,5 20,5" />
+									</svg>
+								</button>
+								<button type="button" id="set_pos_10">
+									<svg viewBox="0 0 25 25">
+										<polygon points="1.895,13 12.501,2.394 23.107,13" />
+									</svg>
+								</button>
+								<button type="button" id="set_pos_20">
+									<svg viewBox="0 0 25 25">
+										<polygon points="20,20 20,5 5,5" />
+									</svg>
+								</button>
+							</div>
+
+							<div class="row">
+								<button type="button" id="set_pos_01">
+									<svg viewBox="0 0 25 25">
+										<polygon points="12,23.105 1.394,12.499 12,1.893" />
+									</svg>
+								</button>
+								<button type="button" id="set_pos_11">
+									<svg viewBox="0 0 25 25">
+										<rect x="4" y="11" width="18" height="4" />
+										<rect x="11" y="4" width="4" height="18" />
+									</svg>
+								</button>
+								<button type="button" id="set_pos_21">
+									<svg viewBox="0 0 25 25">
+										<polygon points="12,1.894 22.606,12.5 12,23.107" />
+									</svg>
+								</button>
+							</div>
+
+							<div class="row">
+								<button type="button" id="set_pos_02">
+									<svg viewBox="0 0 25 25">
+										<polygon points="20,20 5,20 5,5" />
+									</svg>
+								</button>
+								<button type="button" id="set_pos_12">
+									<svg viewBox="0 0 25 25">
+										<polygon points="23.105,12 12.5,22.605 1.893,12" />
+									</svg>
+								</button>
+								<button type="button" id="set_pos_22">
+									<svg viewBox="0 0 25 25">
+										<polygon points="20,5 20,20 5,20" />
+									</svg>
+								</button>
+							</div>
+
+						</div> <!-- position_presets -->
+
+						<div id="reset_btns">
+								<button type="button" id="reset_scale_btn" class="btn-small">Reset size</button>
+								<button type="button" id="reset_crop_btn" class="btn-small">Reset mask</button>
+								<button type="button" id="reverse_btn" class="btn-small">Reverse</button>
+								<button type="button" id="copy_btn" class="btn-small">Copy</button>
+								<button type="button" id="paste_btn" class="btn-small" disabled>Paste</button>
+						</div>
+
+					</div> <!-- data_btns -->
+
+				</fieldset>
+
+			</div>
+
+			<div id="curvebox">
+				<canvas id="curve" width="400" height="400"></canvas>
+			</div>
+
+			<div>
+				<fieldset id="curve_presets" disabled="disabled">
+
+					<div class="row">
+
+						<button type="button" id="easeInSine">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C2.16,15,7.02,15,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInQuad">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C1.98,15,9,15,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInCubic">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C5.76,15,12.06,15,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInQuart">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C9,15,13.5,15,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInQuint">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C11.52,15,14.04,15,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInExpo">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C12.6,15,15.12,15,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInCirc">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C9.9,15,18,9.6,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInBack">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C6.48,15,11.88,21.72,18,3"/>
+							</svg>
+						</button>
+
+					</div>
+
+					<div class="row">
+
+						<button type="button" id="easeOutSine">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C10.98,3,15.84,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeOutQuad">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C9,3,16.02,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeOutCubic">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C5.94,3,12.24,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeOutQuart">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C4.5,3,9,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeOutQuint">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C3.96,3,6.48,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeOutExpo">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C2.88,3,5.4,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeOutCirc">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C0,8.4,8.1,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeOutBack">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C6.12,-3.72,11.52,3,18,3"/>
+							</svg>
+						</button>
+
+					</div>
+
+					<div class="row">
+
+						<button type="button" id="easeInOutSine">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C6.66,15,11.34,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInOutQuad">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C8.1,15,9.9,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInOutCubic">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C11.7,15,6.3,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInOutQuart">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C13.68,15,4.32,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInOutQuint">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C14.94,15,3.06,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInOutExpo">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C15.66,15,2.34,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInOutCirc">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C15.3,15,2.7,3,18,3"/>
+							</svg>
+						</button>
+						<button type="button" id="easeInOutBack">
+							<svg viewBox="0 0 20 20">
+								<path fill="none" stroke-miterlimit="10" d="M2,15C12.24,22.2,5.76,-4.2,18,3"/>
+							</svg>
+						</button>
+
+					</div>
+
+					<div class="row">
+
+						<button type="button" id="linear">
+							<svg viewBox="0 0 20 20">
+								<line fill="none" stroke-miterlimit="10" x1="2" y1="18" x2="18" y2="2"/>
+							</svg>
+						</button>
+
+					</div>
+
+				</fieldset>
+
+			</div>
+
+
+			<fieldset id="sourcebox">
+				<label for="source" class="legend">Set source: 
+					<select id="source" class="dropdown" disabled>
+						<option id="none">No change</option>
+					</select>
+				</label>
+			</fieldset>
+
+		</div>
+
+	</div>
+
+	<div id="footer">
+		ATEM DVE Animation Generator, v#version (#build), #year
+	</div>
+
+</body>
+</html>

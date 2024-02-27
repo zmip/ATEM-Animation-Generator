@@ -1,0 +1,11 @@
+AddType application/x-httpd-php .xml
+
+RewriteEngine On
+
+#auto-version css/js
+RewriteRule ^(.*)\.[\d]{10}\.(css|js)$ $1.$2 [L]
+
+#website
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php/$1 [L]
