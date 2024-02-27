@@ -53,6 +53,36 @@ Generator.getDevices = function()
 			colors: 2
 			},
 
+		sdi: {
+			name: 'ATEM SDI',
+			switchers: 1,
+			keyers: 1,
+			supersource: 0,
+			cameras: 4,
+			mediaplayers: 1,
+			colors: 2
+			},
+
+		sdiproiso: {
+			name: 'ATEM SDI Pro ISO',
+			switchers: 1,
+			keyers: 1,
+			supersource: 0,
+			cameras: 4,
+			mediaplayers: 1,
+			colors: 2
+			},
+
+		sdiextremeiso: {
+			name: 'ATEM SDI Extreme ISO',
+			switchers: 1,
+			keyers: 2,
+			supersource: 1,
+			cameras: 8,
+			mediaplayers: 2,
+			colors: 2
+			},
+
 		tvstudio: {
 			name: 'ATEM Television Studio',
 			switchers: 1,
