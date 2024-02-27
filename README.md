@@ -1,6 +1,8 @@
 # ATEM-Animation-Generator
 An amazing ATEM DVE Animation Generator for creating "macro-based" animations for Blackmagic Design ATEM video switchers.
 
+[Check out the demo](https://zmip.github.io).
+
 ![preview of the animation editor](https://forum.blackmagicdesign.com/download/file.php?id=50357)
 
 ## What is it?
@@ -53,19 +55,39 @@ Use it to your advantage, fork and improve.
 ## Supported devices
 
 * ATEM Mini
+
 * ATEM Mini Pro
+
 * ATEM Mini Pro ISO
+
 * ATEM Mini Extreme
+
 * ATEM Mini Extreme ISO
+
 * ATEM Television Studio
+
 * ATEM 1 M/E Production Switcher
+
 * ATEM 2 M/E Production Switcher
+
 * ATEM Production Studio 4K
+
 * ATEM 1 M/E Production Studio 4K
+
 * ATEM 2 M/E Production Studio 4K
+
 * ATEM 2 M/E Broadcast Studio 4K
+
 * ATEM 4 M/E Broadcast Studio 4K
+
 * ATEM Television Studio HD
+
 * ATEM Television Studio Pro HD
+
 * ATEM Television Studio Pro 4K
+
 * ATEM Constellation 8K
+
+## Development information
+
+A minimal PHP-based build environment is included in the project. It basically allows you to run it on a local webserver in two modes: in **debug** mode, the CSS and JS files are linked into the HTML GUI file (faster). In **build** mode, the minimized CSS and JS files are injected into the HTML GUI file (slower) to produce a single portable distributable HTML file that runs the entire application. Check the /build directory to see what's expected there. Use your favorite job runner to minimize the CSS and JS files after they've been edited.
