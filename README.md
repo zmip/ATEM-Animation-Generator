@@ -84,7 +84,13 @@ As I've written earlier, I'm impressed with what the ATEM Mini's can do, hardwar
 
 * ATEM Television Studio Pro 4K
 
-* ATEM Constellation 8K
+* ATEM Television Studio 4k8 -    **New!**
+
+* ATEM Television Studio HD8 -    **New!**
+
+* ATEM Televison Studio HD8ISO -   **New!**
+
+* ATEM Constellation 8K 
 
 ## Development information
 

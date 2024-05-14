@@ -193,7 +193,7 @@ Generator.getDevices = function()
 			colors: 2
 			},
 
-		tvstudio4k8: {
+		tvstudio4K8: {
 			name: 'ATEM Television Studio 4K8',
 			switchers: 1,
 			keyers: 4,
