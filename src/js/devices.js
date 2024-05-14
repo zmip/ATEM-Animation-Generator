@@ -198,7 +198,7 @@ Generator.getDevices = function()
 			switchers: 4,
 			keyers: 4,
 			supersource: 1, // actually has 2, we only support 1
-			cameras: 8,
+			cameras: 40,
 			mediaplayers: 4,
 			colors: 2
 			}
