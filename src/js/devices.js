@@ -193,6 +193,36 @@ Generator.getDevices = function()
 			colors: 2
 			},
 
+		tvstudio4K8: {
+			name: 'ATEM Television Studio 4K8',
+			switchers: 1,
+			keyers: 4,
+			supersource: 1,
+			cameras: 8,
+			mediaplayers: 2,
+			colors: 2
+			},
+
+		tvstudiohd8iso: {
+			name: 'ATEM Television Studio HD8 ISO',
+			switchers: 1,
+			keyers: 4,
+			supersource: 1,
+			cameras: 8,
+			mediaplayers: 2,
+			colors: 2
+			},
+
+		tvstudiohd8: {
+			name: 'ATEM Television Studio HD8',
+			switchers: 1,
+			keyers: 4,
+			supersource: 1,
+			cameras: 8,
+			mediaplayers: 2,
+			colors: 2
+			},
+
 		constellation8k: {
 			name: 'ATEM Constellation 8K',
 			switchers: 4,
